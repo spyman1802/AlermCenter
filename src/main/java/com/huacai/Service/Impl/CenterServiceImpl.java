@@ -122,14 +122,14 @@ public class CenterServiceImpl implements CenterService {
     });
 
     // 遍历所有得微信通道，发送日结消息
-    List<MessageServer> msgServerList = db.getAllMessageServerList();
-    msgServerList.forEach(ms -> {
-      // Get current clock
-      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      String nowTimeString = df.format(new Date());
-
-      rest.sendGroupMessage(ms.getType(), ms.getName(), "今天日结完毕");
-    });
+//    List<MessageServer> msgServerList = db.getAllMessageServerList();
+//    msgServerList.forEach(ms -> {
+//      // Get current clock
+//      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//      String nowTimeString = df.format(new Date());
+//
+//      rest.sendGroupMessage(ms.getType(), ms.getName(), "今天日结完毕");
+//    });
 
   }
 

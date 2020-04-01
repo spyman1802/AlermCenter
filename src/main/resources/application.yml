@@ -11,6 +11,10 @@ logging:
     "com.huacai.DAO.Impl.*": trace
     "com.huacai.DAO.*" : trace
     "org.springframework.web.client.RestTemplate" : trace
+  file:
+    name: AlermCenter.log
+    max-history: 10
+    max-size: 100MB
 
 spring:
   datasource:
