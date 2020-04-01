@@ -37,7 +37,6 @@ public class httpClient {
 
     List<MediaType> list = new ArrayList<MediaType>();
     list.add(MediaType.APPLICATION_JSON);
-    list.add(MediaType.APPLICATION_JSON_UTF8);
     list.add(MediaType.APPLICATION_FORM_URLENCODED);
     list.add(MediaType.APPLICATION_XML);
     list.add(MediaType.TEXT_PLAIN);
