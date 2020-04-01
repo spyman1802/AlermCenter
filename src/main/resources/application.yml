@@ -1,0 +1,40 @@
+server:
+  port: 10000
+  compression:
+    enabled : true
+    mime-types : application/json
+
+logging:
+  level:
+    "com.huacai.AlermController" : trace
+    "com.huacai.Service.*": trace
+    "com.huacai.DAO.Impl.*": trace
+    "com.huacai.DAO.*" : trace
+    "org.springframework.web.client.RestTemplate" : trace
+
+spring:
+#  redis:
+#    host: 172.26.157.242
+#    port: 20000
+
+  datasource:
+    url: jdbc:mysql://172.26.157.242:10000/alerm_center?serverTimezone=Asia/Shanghai&useSSL=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: acenter
+    password: Mysql12#
+
+#groupServer:
+#  QQ:
+#    ip:   192.168.236.13
+#    port: 5000
+#  WX:
+#    ip:   192.168.236.13
+#    port: 3000
+
+wechat:
+  corpid: ww2abb1d881cd5bb0a
+  corpsecret: G1SpZGdZvYdXeyht062RKLhUXvaPT8Wm9mZ2CJR89_g
+  agentid: 1000002
+  token-url: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+  message-url: https://qyapi.weixin.qq.com/cgi-bin/message/send
+  pre-message: "[From AlermCenter]"
