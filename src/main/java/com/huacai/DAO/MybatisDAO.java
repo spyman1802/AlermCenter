@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public interface MybatisDAO {
  
   // 插入报警信息
-  @Insert("insert into zone_alerm (zid, zabbix_id, zabbix_host, alerm_info, alerm_level) values (#{zid}, #{zabbixID}, #{zabbixHost}, #{alermInfo}, #{alermLevel})")
+  @Insert("insert into zone_alerm (zid, zabbix_id, zabbix_host, alerm_info, alerm_level, release_time) values (#{zid}, #{zabbixID}, #{zabbixHost}, #{alermInfo}, #{alermLevel}), str_to_date('2000-01-01', '%Y-%m-%d')")
   int insertAlerm(ZabbixAlerm zabbixAlerm);
   
   // 解除报警
@@ -53,11 +53,20 @@ public interface MybatisDAO {
   HashMap getZabbixHisAlermCount(@Param("zid") int zid, @Param("cdate") String cdate);
  
   // 查询指定某一天发生报警的数量
+  // 查询指定机房的告警数量
   @Select("select count(*) as cnt "
       + "  from zone_alerm "
       + " where zid = #{zid} "
-      + "   and occur_time >= str_to_date(#{cdate}, '%Y-%m-%d') "
-      + "   and occur_time < DATE_ADD(str_to_date(#{cdate}, '%Y-%m-%d'), INTERVAL 1 DAY)")
+      + "   and alerm_status = 1 ")
+  int getZabbixNowAlermCount(@Param("zid") int zid);
+
+  // 查询指定某一天发生报警的数量
+  // 查询指定机房的告警数量
+  @Select("select count(*) as cnt "
+          + "  from zone_alerm "
+          + " where zid = #{zid} "
+          + "   and occur_time >= str_to_date(#{cdate}, '%Y-%m-%d') "
+          + "   and occur_time < DATE_ADD(str_to_date(#{cdate}, '%Y-%m-%d'), INTERVAL 1 DAY)")
   int getZabbixDayOccurAlermCount(@Param("zid") int zid, @Param("cdate") String cdate);
 
   // 查询指定某一天解除报警的数量
@@ -65,8 +74,7 @@ public interface MybatisDAO {
       + "  from zone_alerm "
       + " where zid = #{zid} "
       + "   and release_time >= str_to_date(#{cdate}, '%Y-%m-%d') "
-      + "   and release_time < DATE_ADD(str_to_date(#{cdate}, '%Y-%m-%d'), INTERVAL 1 DAY)"
-      + "   and alerm_status = 2")
+      + "   and release_time < DATE_ADD(str_to_date(#{cdate}, '%Y-%m-%d'), INTERVAL 1 DAY)")
   int getZabbixDayReleaseAlermCount(@Param("zid") int zid, @Param("cdate") String cdate);
   
   // 插入日结表

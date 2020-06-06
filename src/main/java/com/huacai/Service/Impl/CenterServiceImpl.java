@@ -135,34 +135,7 @@ public class CenterServiceImpl implements CenterService {
 
   @Override
   public int getNowAlermCount(int zid) {
-    // 获取当前的警报数量
-    // 1、获取前一天的未解除警报数量
-    // 2、获取当天发生的警报数量
-    // 3、获取当天释放的警报数量
-    // 4、返回当天数量
-
-    // 当前时间
-    Date nowDate = DateUtil.date();
-
-    // 前一天的日期字符串
-    String preDayString = DateUtil.formatDate(DateUtil.offsetDay(nowDate, -1));
-
-    // 当前日期的字符串
-    String nowDayString = DateUtil.today();
-
-    int preAlermCount = 0;
-
-    @SuppressWarnings("rawtypes")
-    HashMap map = db.getZabbixHisAlermCount(zid, preDayString);
-
-    if (map != null && !map.isEmpty()) {
-      preAlermCount = (int) map.get("dayCount");
-    }
-
-    int nowOccurCount = db.getZabbixDayOccurAlermCount(zid, nowDayString);
-    int nowReleaseCount = db.getZabbixDayReleaseAlermCount(zid, nowDayString);
-
-    return preAlermCount + nowOccurCount - nowReleaseCount;
+    return db.getZabbixNowAlermCount(zid);
   }
 
   @Override
