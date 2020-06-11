@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public interface MybatisDAO {
  
   // 插入报警信息
-  @Insert("insert into zone_alerm (zid, zabbix_id, zabbix_host, alerm_info, alerm_level, release_time) values (#{zid}, #{zabbixID}, #{zabbixHost}, #{alermInfo}, #{alermLevel}), str_to_date('2000-01-01', '%Y-%m-%d')")
+  @Insert("insert into zone_alerm (zid, zabbix_id, zabbix_host, alerm_info, alerm_level, release_time) values (#{zid}, #{zabbixID}, #{zabbixHost}, #{alermInfo}, #{alermLevel}, str_to_date('2000-01-01', '%Y-%m-%d'))")
   int insertAlerm(ZabbixAlerm zabbixAlerm);
   
   // 解除报警
